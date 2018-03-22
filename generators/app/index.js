@@ -33,13 +33,16 @@ module.exports = yeoman.generators.Base.extend({
             name: 'version',
             message: 'What version of Opencart will your module be for?',
             choices: [{
-                name: '1.5.x',
+                name: 'OpenCart 1.5.x',
                 value: '1_5'
             }, {
-                name: '2.x',
+                name: 'OpenCart 2.1-2.2',
                 value: '2_x'
+            }, {
+                name: 'OpenCart 2.3',
+                value: '2_3'
             }],
-            default: 1
+            default: 2
         }, {
             type: 'list',
             name: 'module_type',
