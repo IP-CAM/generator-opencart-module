@@ -5,7 +5,7 @@
 
 This package provides an easy way to create a starting structure for your Opencart module.
 
-![J9dzRT](http://cdn.makeagif.com/media/3-21-2016/J9dzRT.gif)
+![J9dzRT](https://netsh.pp.ua/wp-content/uploads/generator-opencart.gif)
 
 ## Installation - Option 0
 Linux, OSx, Windows:
