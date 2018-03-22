@@ -28,14 +28,17 @@ To generate modules without the requirement of node.js and Yeoman, you can use a
 
 To generate your new project:
 First, start a powershell terminal window.  Then go to your instailation folder and execute the build script.
-WARNING: PowerShell script doesn't support next tools for this moment:
-* OpenCart 2.3
-* OCMOD
-* Russian language
+
 ```PowerShell
 cd <install folder>\generators\app
 generate-module.ps1
 ```
+
+WARNING: PowerShell script doesn't support next tools for this moment:
+* OpenCart 2.3
+* OCMOD
+* Russian language
+
 
 * Originally developed by Taiye Ogunnigbo - https://twitter.com/taiyeoguns
 * Windows Powershell Script provided by Jayson Johnson - Edmonton Acrobatic Gymnastics - edmontonacro.ca

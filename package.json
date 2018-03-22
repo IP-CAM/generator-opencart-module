@@ -1,6 +1,6 @@
 {
   "name": "generator-opencart-module-ru",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Yeoman generator for Opencart module with Opencart 2.3, OCMOD and Russian language supporting",
   "homepage": "https://github.com/iMateo/generator-opencart-module",
   "author": {
