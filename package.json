@@ -1,12 +1,12 @@
 {
-  "name": "generator-opencart-module",
-  "version": "0.1.2",
-  "description": "Yeoman generator for Opencart module",
-  "homepage": "https://github.com/taiyeoguns/generator-opencart-module",
+  "name": "generator-opencart-module-ru",
+  "version": "1.0",
+  "description": "Yeoman generator for Opencart module with Opencart 2.3, OCMOD and Russian language supporting",
+  "homepage": "https://github.com/iMateo/generator-opencart-module",
   "author": {
-    "name": "Taiye Ogunnigbo",
-    "email": "taiyeoguns@gmail.com",
-    "url": "http://taiyeogunnigbo.name.ng/"
+    "name": "Ihor Chyshkala",
+    "email": "igor@chishkala.org.ua",
+    "url": "https://netsh.pp.ua/en/"
   },
   "files": [
     "generators"
@@ -14,6 +14,8 @@
   "main": "generators\\index.js",
   "keywords": [
     "opencart",
+    "opencart 2.3",
+    "ocmod",
     "module",
     "yeoman-generator"
   ],
@@ -43,7 +45,7 @@
       "mocha": true
     }
   },
-  "repository": "https://github.com/taiyeoguns/generator-opencart-module.git",
+  "repository": "https://github.com/iMateo/generator-opencart-module.git",
   "scripts": {
     "prepublish": "gulp prepublish",
     "test": "gulp"
