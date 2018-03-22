@@ -7,12 +7,23 @@ var _s = require('underscore.string');
 //
 var classify_format, underscore_format, titleize_format, oc_version, mod_type;
 
-var CONTROLLER_DIR = 'upload/%c%/controller/%t%/',
-    LANGUAGE_DIR = 'upload/%c%/language/english/%t%/',
-    MODEL_DIR = 'upload/%c%/model/%t%/',
-    ADMIN_VIEW_DIR = 'upload/admin/view/template/%t%/',
-    CATALOG_VIEW_DIR = 'upload/catalog/view/theme/default/template/%t%/',
-    VQMOD_DIR = 'upload/vqmod/xml/';
+// Opencart 1.5 - 2.2 path variables
+var CONTROLLER_DIR = 'ready/upload/%c%/controller/%t%/',
+    LANGUAGE_DIR = 'ready/upload/%c%/language/english/%t%/',
+    LANGUAGE_RU_DIR = 'ready/upload/%c%/language/russian/%t%/',
+    MODEL_DIR = 'ready/upload/%c%/model/%t%/',
+    ADMIN_VIEW_DIR = 'ready/upload/admin/view/template/%t%/',
+    CATALOG_VIEW_DIR = 'ready/upload/catalog/view/theme/default/template/%t%/',
+    VQMOD_DIR = 'ready/upload/vqmod/xml/',
+    OCMOD_DIR = 'ready/';
+
+// Opencart 2.3 path variables
+var CONTROLLER_23_DIR = 'ready/upload/%c%/controller/extension/%t%/',
+    LANGUAGE_23_DIR = 'ready/upload/%c%/language/en-gb/extension/%t%/',
+    LANGUAGE_RU_23_DIR = 'ready/upload/%c%/language/ru-ru/extension/%t%/',
+    MODEL_23_DIR = 'ready/upload/%c%/model/extension/%t%/',
+    ADMIN_VIEW_23_DIR = 'ready/upload/admin/view/template/extension/%t%/',
+    CATALOG_VIEW_23_DIR = 'ready/upload/catalog/view/theme/default/template/extension/%t%/';
 
 module.exports = yeoman.generators.Base.extend({
     prompting: function() {
@@ -73,6 +84,11 @@ module.exports = yeoman.generators.Base.extend({
             name: 'vqmod',
             message: 'Will the module require vQmod support?',
             default: false
+        }, {
+            type: 'confirm',
+            name: 'ocmod',
+            message: 'Will the module require OCMOD support?',
+            default: false
         }];
 
         this.prompt(prompts, function(props) {
@@ -95,7 +111,87 @@ module.exports = yeoman.generators.Base.extend({
 
         //admin
 
+        if (this.props.version == '2_3') {
+            this.fs.copyTpl(
+            this.templatePath(oc_version + '/_admin_controller.php'),
+            this.destinationPath(_s(CONTROLLER_23_DIR).replaceAll('%c%', 'admin').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                classified_name: classify_format,
+                underscored_name: underscore_format,
+                module_type: mod_type
+            }
+        );
+
         this.fs.copyTpl(
+            this.templatePath(oc_version + '/_admin_language.php'),
+            this.destinationPath(_s(LANGUAGE_23_DIR).replaceAll('%c%', 'admin').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                titleized_name: titleize_format,
+                underscored_name: underscore_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_admin_ru_language.php'),
+            this.destinationPath(_s(LANGUAGE_RU_23_DIR).replaceAll('%c%', 'admin').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                titleized_name: titleize_format,
+                underscored_name: underscore_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_admin_view.tpl'),
+            this.destinationPath(_s(ADMIN_VIEW_23_DIR).replaceAll('%t%', mod_type).value() + underscore_format + '.tpl'), {
+                underscored_name: underscore_format,
+                module_type: mod_type
+            }
+        );
+
+        //catalog
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_catalog_controller.php'),
+            this.destinationPath(_s(CONTROLLER_23_DIR).replaceAll('%c%', 'catalog').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                classified_name: classify_format,
+                underscored_name: underscore_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_catalog_language.php'),
+            this.destinationPath(_s(LANGUAGE_23_DIR).replaceAll('%c%', 'catalog').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                titleized_name: titleize_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_catalog_ru_language.php'),
+            this.destinationPath(_s(LANGUAGE_RU_23_DIR).replaceAll('%c%', 'catalog').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                titleized_name: titleize_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_catalog_model.php'),
+            this.destinationPath(_s(MODEL_23_DIR).replaceAll('%c%', 'catalog').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                classified_name: classify_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_catalog_view.tpl'),
+            this.destinationPath(_s(CATALOG_VIEW_23_DIR).replaceAll('%t%', mod_type).value() + underscore_format + '.tpl'), {
+                titleized_name: titleize_format,
+                module_type: mod_type
+            }
+        );
+
+        } else {
+            this.fs.copyTpl(
             this.templatePath(oc_version + '/_admin_controller.php'),
             this.destinationPath(_s(CONTROLLER_DIR).replaceAll('%c%', 'admin').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
                 classified_name: classify_format,
@@ -107,6 +203,15 @@ module.exports = yeoman.generators.Base.extend({
         this.fs.copyTpl(
             this.templatePath(oc_version + '/_admin_language.php'),
             this.destinationPath(_s(LANGUAGE_DIR).replaceAll('%c%', 'admin').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                titleized_name: titleize_format,
+                underscored_name: underscore_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
+            this.templatePath(oc_version + '/_admin_ru_language.php'),
+            this.destinationPath(_s(LANGUAGE_RU_DIR).replaceAll('%c%', 'admin').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
                 titleized_name: titleize_format,
                 underscored_name: underscore_format,
                 module_type: mod_type
@@ -141,6 +246,14 @@ module.exports = yeoman.generators.Base.extend({
         );
 
         this.fs.copyTpl(
+            this.templatePath(oc_version + '/_catalog_ru_language.php'),
+            this.destinationPath(_s(LANGUAGE_RU_DIR).replaceAll('%c%', 'catalog').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
+                titleized_name: titleize_format,
+                module_type: mod_type
+            }
+        );
+
+        this.fs.copyTpl(
             this.templatePath(oc_version + '/_catalog_model.php'),
             this.destinationPath(_s(MODEL_DIR).replaceAll('%c%', 'catalog').replaceAll('%t%', mod_type).value() + underscore_format + '.php'), {
                 classified_name: classify_format,
@@ -155,6 +268,7 @@ module.exports = yeoman.generators.Base.extend({
                 module_type: mod_type
             }
         );
+        }
 
         //vqmod
         if (this.props.vqmod == true) {
@@ -163,6 +277,17 @@ module.exports = yeoman.generators.Base.extend({
                 this.destinationPath(VQMOD_DIR + underscore_format + '.xml'), {
                     titleized_name: titleize_format,
                     underscored_name: underscore_format
+                }
+            );
+        }
+
+        //ocmod
+        if (this.props.ocmod == true) {
+            this.fs.copyTpl(
+                this.templatePath(oc_version + '/_ocmod.xml'),
+                this.destinationPath(OCMOD_DIR + underscore_format + '.xml'), {
+                    titleized_name: titleize_format,
+                    underscored_name: underscore_format    
                 }
             );
         }

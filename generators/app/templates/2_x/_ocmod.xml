@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Modification for <%= titleized_name %></name>
+    <version>1.0</version>
+    <author>Your Name Here</author>
+    <email>your_mail@gmail.com</email>
+    <link>http://www.your-website-here.com</link>
+    <file path="admin/controller/extension/module/<%= underscored_name %>.php">
+        <operation>
+            <search><![CDATA[
+            $data['column_left'] = $this->load->controller('common/column_left');
+            ]]></search>
+            <add position="replace"><![CDATA[
+            $data['column_left'] = $this->load->controller('common/column_left');
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/controller/extension/module/<%= underscored_name %>.php">
+        <operation>
+            <search><![CDATA[
+            $data['column_left'] = $this->load->controller('common/column_left');
+            ]]></search>
+            <add position="replace"><![CDATA[
+            $data['column_left'] = $this->load->controller('common/column_left');
+            ]]></add>
+        </operation>
+    </file>  
+</modification>
