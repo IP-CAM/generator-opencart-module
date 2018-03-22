@@ -7,7 +7,7 @@ class ControllerExtension<%= classified_name %> extends Controller {
 	public function index() {
 
 		//Load language file
-		$this->load->language('<%= module_type %>/<%= underscored_name %>');
+    $this->load->language('extension/<%= module_type %>/<%= underscored_name %>');
 
 		//Set title from language file
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -21,7 +21,7 @@ class ControllerExtension<%= classified_name %> extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->response->redirect($this->url->link('extension/<%= module_type %>', 'token=' . $this->session->data['token'], 'SSL'));
+			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
 		$text_strings = array(
@@ -56,19 +56,19 @@ class ControllerExtension<%= classified_name %> extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_<%= module_type %>'),
-			'href'      => $this->url->link('extension/<%= module_type %>', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('<%= module_type %>/<%= underscored_name %>', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('extension/<%= module_type %>/<%= underscored_name %>', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 
-		$data['action'] = $this->url->link('<%= module_type %>/<%= underscored_name %>', 'token=' . $this->session->data['token'], 'SSL');
+		$data['action'] = $this->url->link('extension/<%= module_type %>/<%= underscored_name %>', 'token=' . $this->session->data['token'], 'SSL');
 
-		$data['cancel'] = $this->url->link('extension/<%= module_type %>', 'token=' . $this->session->data['token'], 'SSL');
+		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL');
 
 
 		//Check if multiple instances of this module
@@ -90,7 +90,7 @@ class ControllerExtension<%= classified_name %> extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		//Send the output
-		$this->response->setOutput($this->load->view('<%= module_type %>/<%= underscored_name %>.tpl', $data));
+		$this->response->setOutput($this->load->view('extension/<%= module_type %>/<%= underscored_name %>.tpl', $data));
 	}
 
 	/*
@@ -99,7 +99,7 @@ class ControllerExtension<%= classified_name %> extends Controller {
 	 *
 	 */
 	private function validate() {
-		if (!$this->user->hasPermission('modify', '<%= module_type %>/<%= underscored_name %>')) {
+		if (!$this->user->hasPermission('modify', 'extension/<%= module_type %>/<%= underscored_name %>')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
